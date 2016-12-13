@@ -13,7 +13,8 @@
         <th class="col-md-3">Картинка</th>
         <th class="col-md-4">Опис</th>
         <th class="col-md-1">Ціна</th>
-        <th class="col-md-2">Дії</th>
+        <th class="col-md-2"><a href="/admin/create-product/{{this._id}}"><i class="fa fa-plus" aria-hidden="true"></i>Додати</a>
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -24,11 +25,11 @@
             <td class="col-md-4 overme">{{ this.description }}</td>
             <td class="col-md-1">&#8372;{{ this.price }}</td>
             <td class="col-md-2 text-nowrap">
-                <a href="/edit-product/{{this._id}}">
+                <a href="/admin/edit-product/{{this._id}}">
                     <i class="fa fa-pencil" aria-hidden="true"></i> Редагувати
                 </a>
                 <br>
-                <a href="/delete-product/{{this._id}}"><i class="fa fa-times" aria-hidden="true"></i> Видалити
+                <a href="/admin/delete-product/{{this._id}}"><i class="fa fa-times" aria-hidden="true"></i> Видалити
                 </a>
             </td>
         </tr>

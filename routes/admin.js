@@ -27,6 +27,68 @@ router.get('/products', isAdmin, function (req, res, next) {
   });
 });
 
+router.get('/edit-product/:id', isAdmin, function (req, res, next) {
+  var successMsg = req.flash('success')[0];
+  Product.findById(req.params.id ,function(err, product) {
+    if(err)
+      res.redirect('/admin/products');
+    res.render('admin/edit-product', {edit: true, product:product, successMsg: successMsg, noMessages: !successMsg});
+  })
+});
+
+router.post('/edit-product/:id', isAdmin, function(req, res, next) {
+  Product.findByIdAndUpdate(req.params.id, {
+    $set: {
+      imagePath: req.body.imagePath,
+      title: req.body.title,
+      description: req.body.description,
+      price: parseInt(req.body.price)
+    }
+  }, function(err, result) {
+    req.flash('success', 'Збережено!');
+    res.redirect('/admin/products');
+  });
+});
+
+router.get('/create-product', isAdmin, function (req, res, next) {
+  var successMsg = req.flash('success')[0];
+  res.render('admin/edit-product', {edit: false, successMsg: successMsg, noMessages: !successMsg});
+});
+
+router.post('/create-product', isAdmin, function(req, res, next) {
+  var newProduct = new Product({
+    imagePath: req.body.imagePath,
+    title: req.body.title,
+    description: req.body.description,
+    price: parseInt(req.body.price)
+  });
+  newProduct.save(function(err, result) {
+    req.flash('success', 'Збережено!');
+    res.redirect('/admin/products');
+  });
+});
+
+router.get('/delete-user/:id', isAdmin, function(req, res, next) {
+  User.findByIdAndRemove(req.params.id,function(err, result) {
+    req.flash('success', 'Видалено!');
+    res.redirect('/admin/users');
+  });
+});
+
+router.get('/delete-order/:id', isAdmin, function(req, res, next) {
+  Order.findByIdAndRemove(req.params.id,function(err, result) {
+    req.flash('success', 'Видалено!');
+    res.redirect('/admin/orders');
+  });
+});
+
+router.get('/delete-product/:id', isAdmin, function(req, res, next) {
+  Product.findByIdAndRemove(req.params.id,function(err, result) {
+    req.flash('success', 'Видалено!');
+    res.redirect('/admin/products');
+  });
+});
+
 router.get('/orders', isAdmin, function (req, res, next) {
   var successMsg = req.flash('success')[0];
   Order.find(function (err, orders) {
