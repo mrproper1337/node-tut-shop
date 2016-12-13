@@ -10,3 +10,9 @@
     font-weight: bold;
     font-size: 16px;
 }
+
+.overme {
+    max-width: 100px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}

@@ -13,7 +13,9 @@ var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
+var adminRoutes = require('./routes/admin');
 var userRoutes = require('./routes/user');
+var config = require('./config/all');
 
 var app = express();
 
@@ -45,11 +47,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
     res.locals.login = req.isAuthenticated();
+    res.locals.admin = req.isAuthenticated() && req.user.email === config.defaultAdmin.email;
     res.locals.session = req.session;
     next();
 });
 
 app.use('/user', userRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', routes);
 
 // catch 404 and forward to error handler

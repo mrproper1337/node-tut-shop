@@ -14,6 +14,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                {{# if admin }}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  Адміністрування <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/admin/users">Користувачі</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/admin/orders">Замовлення</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/admin/products">Продукти</a></li>
+                        </ul>
+                    </li>
+                {{/if}}
                 <li>
                     <a href="/shopping-cart/">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Кошик
