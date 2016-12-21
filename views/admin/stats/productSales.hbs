@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <div id="success" class="alert alert-success" {{#if noMessages}}hidden{{/if}}>
+            {{ successMsg }}
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr class="row">
+        <th class="col-md-3">Назва</th>
+        <th class="col-md-3">Опис</th>
+        <th class="col-md-3">Ціна</th>
+        <th class="col-md-3">Продано</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{# each data }}
+        <tr class="row">
+            <td class="col-md-3">{{ this.title }}</td>
+            <td class="col-md-3 overme">{{ this.description }}</td>
+            <td class="col-md-3">&#8372;{{ this.price }}</td>
+            <td class="col-md-3">{{ this.sales }}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
